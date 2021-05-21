@@ -1,7 +1,7 @@
 package edu.pja.s14616.sri.sri4soapws;
 
-import edu.pja.s14616.sri.sri4soapws.model.Employee;
-import edu.pja.s14616.sri.sri4soapws.repo.EmployeeRepository;
+import edu.pja.s14616.sri.sri4soapws.model.Customer;
+import edu.pja.s14616.sri.sri4soapws.repo.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,28 +18,34 @@ import java.util.Arrays;
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
     private static final Logger LOG = LoggerFactory.getLogger(DataInitializer.class);
 
-    private final EmployeeRepository employeeRepository;
+    private final CustomerRepository customerRepository;
 
     public void initData(){
-        Employee e1 = Employee.builder()
+        Customer e1 = Customer.builder()
                 .firstName("Jan")
                 .lastName("Kowalski")
-                .job("Clerk")
-                .birthDate(LocalDate.of(1994, 01,01))
+                .job("Manager")
+                .purchases(2L)
+                .companyName("Staples")
+                .joinDate(LocalDate.of(2012, 05,01))
                 .build();
-        Employee e2 = Employee.builder()
+        Customer e2 = Customer.builder()
                 .firstName("Jan")
-                .lastName("Kowalski")
-                .job("Clerk")
-                .birthDate(LocalDate.of(1994, 01,01))
+                .lastName("Nowak")
+                .job("Accountant")
+                .purchases(10L)
+                .companyName("Amazon")
+                .joinDate(LocalDate.of(2015, 01,01))
                 .build();
-        Employee e3 = Employee.builder()
-                .firstName("Jan")
-                .lastName("Kowalski")
-                .job("Clerk")
-                .birthDate(LocalDate.of(1994, 01,01))
+        Customer e3 = Customer.builder()
+                .firstName("Michał")
+                .lastName("Hyla")
+                .job("java lover")
+                .purchases(2L)
+                .companyName("jk")
+                .joinDate(LocalDate.of(2010, 10,11))
                 .build();
-        employeeRepository.saveAll(Arrays.asList(e1,e2,e3));
+        customerRepository.saveAll(Arrays.asList(e1,e2,e3));
         LOG.info("Data initialized");
     }
     @Override

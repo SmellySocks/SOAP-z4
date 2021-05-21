@@ -16,12 +16,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Employee {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
-    private LocalDate birthDate;
+    private String companyName;
+    private LocalDate joinDate;
+    private Long purchases;
     private String job;
 }

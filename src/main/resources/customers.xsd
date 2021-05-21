@@ -1,0 +1,69 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://sri4soapws.sri.s14616.pja.edu/customers"
+           targetNamespace="http://sri4soapws.sri.s14616.pja.edu/customers"
+           elementFormDefault="qualified">
+    <xs:complexType name="customerDto">
+        <xs:sequence>
+            <xs:element name="id" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="firstname" type="xs:string"/>
+            <xs:element name="lastname" type="xs:string"/>
+            <xs:element name="companyName" type="xs:string"/>
+            <xs:element name="birthDate" type="xs:date"/>
+            <xs:element name="purchases" type="xs:long"/>
+            <xs:element name="job" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="getCustomersRequest">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customers" type="tns:customerDto" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomerByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="tns:customerDto" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomersByCompanyNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerCompanyName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomersByCompanyNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="tns:customerDto" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="tns:customerDto"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerId" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

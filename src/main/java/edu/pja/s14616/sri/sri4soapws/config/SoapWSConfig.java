@@ -15,7 +15,7 @@ import org.springframework.xml.xsd.XsdSchema;
 @EnableWs
 @Configuration
 public class SoapWSConfig extends WsConfigurerAdapter {
-    public static final String EMPLOYEE_NAMESPACE = "http://sri4soapws.sri.s14616.pja.edu/employees";
+    public static final String CUSTOMER_NAMESPACE = "http://sri4soapws.sri.s14616.pja.edu/customers";
 
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext){
@@ -24,17 +24,17 @@ public class SoapWSConfig extends WsConfigurerAdapter {
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
-    @Bean(name = "employees")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema employeesSchema){
+    @Bean(name = "customers")
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema customersSchema){
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("EmployeesPort");
-        wsdl11Definition.setLocationUri("/ws/employees");
-        wsdl11Definition.setTargetNamespace(EMPLOYEE_NAMESPACE);
-        wsdl11Definition.setSchema(employeesSchema);
+        wsdl11Definition.setPortTypeName("CustomersPort");
+        wsdl11Definition.setLocationUri("/ws/customers");
+        wsdl11Definition.setTargetNamespace(CUSTOMER_NAMESPACE);
+        wsdl11Definition.setSchema(customersSchema);
         return wsdl11Definition;
     }
 
     @Bean
-    public XsdSchema countriesSchema() {return new SimpleXsdSchema(new ClassPathResource("employees.xsd"));
+    public XsdSchema countriesSchema() {return new SimpleXsdSchema(new ClassPathResource("customers.xsd"));
     }
 }

@@ -76,7 +76,7 @@
                     <execution> <id>xjc</id> <goals>
                         <goal>xjc</goal> </goals>
                     </execution> </executions> <configuration>
-                    <sources> <source>${project.basedir}/src/main/resources/employees.xsd</source>
+                    <sources> <source>${project.basedir}/src/main/resources/customers.xsd</source>
                     </sources> </configuration>
             </plugin>
 
