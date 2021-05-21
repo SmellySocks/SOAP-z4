@@ -8,7 +8,7 @@
             <xs:element name="firstname" type="xs:string"/>
             <xs:element name="lastname" type="xs:string"/>
             <xs:element name="companyName" type="xs:string"/>
-            <xs:element name="birthDate" type="xs:date"/>
+            <xs:element name="joinDate" type="xs:date"/>
             <xs:element name="purchases" type="xs:long"/>
             <xs:element name="job" type="xs:string"/>
         </xs:sequence>
@@ -46,6 +46,20 @@
         </xs:complexType>
     </xs:element>
     <xs:element name="getCustomersByCompanyNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="tns:customerDto" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomersByPurchasesGreaterThanRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customerPurchases" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCustomersByPurchasesGreaterThanResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="customer" type="tns:customerDto" minOccurs="0" maxOccurs="unbounded"/>

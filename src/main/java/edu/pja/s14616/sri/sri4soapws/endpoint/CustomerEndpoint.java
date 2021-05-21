@@ -35,15 +35,27 @@ public class CustomerEndpoint {
                 res.getCustomers().addAll(dtoList);
                 return res;
             }
-    @PayloadRoot(namespace = SoapWSConfig.CUSTOMER_NAMESPACE, localPart = "getCustomersByCompanyNameRequest")
-    @ResponsePayload
-    public GetCustomersByCompanyNameResponse getCustomersByCompanyName(@RequestPayload GetCustomersByCompanyNameRequest req) {
+            @PayloadRoot(namespace = SoapWSConfig.CUSTOMER_NAMESPACE, localPart = "getCustomersByCompanyNameRequest")
+            @ResponsePayload
+            public GetCustomersByCompanyNameResponse getCustomersByCompanyName(@RequestPayload GetCustomersByCompanyNameRequest req) {
                 String companyName = req.getCustomerCompanyName().toString();
-        List<Customer> customerList = customerRepository.findCustomersByCompanyName(companyName);
+                List<Customer> customerList = customerRepository.findCustomersByCompanyName(companyName);
+                List<CustomerDto> dtoList = customerList.stream()
+                    .map( this::convertToDto )
+                    .collect(Collectors.toList());
+            GetCustomersByCompanyNameResponse res = new GetCustomersByCompanyNameResponse();
+            res.getCustomer().addAll(dtoList);
+            return res;
+            }
+    @PayloadRoot(namespace = SoapWSConfig.CUSTOMER_NAMESPACE, localPart = "getCustomersByPurchasesGreaterThanRequest")
+    @ResponsePayload
+    public GetCustomersByPurchasesGreaterThanResponse getCustomersByPurchasesGreaterThan(@RequestPayload GetCustomersByPurchasesGreaterThanRequest req) {
+        Long count = req.getCustomerPurchases().longValue();
+        List<Customer> customerList = customerRepository.findCustomersByPurchasesGreaterThan(count);
         List<CustomerDto> dtoList = customerList.stream()
                 .map( this::convertToDto )
                 .collect(Collectors.toList());
-        GetCustomersByCompanyNameResponse res = new GetCustomersByCompanyNameResponse();
+        GetCustomersByPurchasesGreaterThanResponse res = new GetCustomersByPurchasesGreaterThanResponse();
         res.getCustomer().addAll(dtoList);
         return res;
     }
@@ -76,9 +88,9 @@ public class CustomerEndpoint {
                     dto.setFirstname(e.getFirstName());
                     dto.setLastname(e.getLastName());
                     dto.setCompanyName(e.getCompanyName());
-                    XMLGregorianCalendar birthDate = null;
-                    birthDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(e.getJoinDate().toString());
-                    dto.setBirthDate(birthDate);
+                    XMLGregorianCalendar joinDate = null;
+                    joinDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(e.getJoinDate().toString());
+                    dto.setJoinDate(joinDate);
                     dto.setPurchases(e.getPurchases());
                     dto.setJob(e.getJob());
 
